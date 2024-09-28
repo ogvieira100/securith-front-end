@@ -1,0 +1,33 @@
+.blue{
+    background-color: #007bff; /* Azul */
+    color: #fff; /* Texto Branco */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.pink
+{
+    background-color: #d5006d; /* Rosa */
+    color: #fff; /* Texto Branco */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+}
+.black
+{
+    background-color: #1e1e1e; /* Preto */
+    color: #fff; /* Texto Branco */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}

@@ -1,0 +1,15 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate >
+    <div>
+      <label for="username">Usuário</label>
+      <input id="username" type="text" formControlName="userName" />
+    </div>
+  
+    <div>
+      <label for="password">Senha</label>
+      <input id="password" type="password" formControlName="password" />
+    </div>
+  
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  </form>
+  <pzs-captcha></pzs-captcha>
+  <app-loader></app-loader>

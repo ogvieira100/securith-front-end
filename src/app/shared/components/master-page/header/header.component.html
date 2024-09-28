@@ -1,0 +1,19 @@
+<p>header</p>
+<input type="button" (click)="logoff()" value="sair" />
+
+<h3>Escolha uma opção</h3>
+<form>
+  <label>
+    <input type="radio" name="options" (ngModelChange)="onOptionChange($event)" [(ngModel)]="selectedOption" value="black"> black
+  </label>
+  <br>
+  <label>
+    <input type="radio" name="options" (ngModelChange)="onOptionChange($event)" [(ngModel)]="selectedOption" value="pink"> pink
+  </label>
+  <br>
+  <label>
+    <input type="radio" name="options" (ngModelChange)="onOptionChange($event)" [(ngModel)]="selectedOption" value="blue"> blue
+  </label>
+</form>
+
+<p>Opção selecionada: {{ selectedOption }}</p>

@@ -1,0 +1,10 @@
+<form (ngSubmit)="submitForm()">
+    <ngx-recaptcha2 
+    #captchaElem
+      [siteKey]="captchaKey"
+      (success)="onCaptchaSuccess($event)"
+      [size]="'normal'"
+      [theme]="'light'"
+      [type]="'image'">
+    </ngx-recaptcha2>
+  </form>
