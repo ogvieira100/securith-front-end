@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { UserResponse } from '../models/user-response';
-import { catchError, delay, firstValueFrom, of, throwError } from 'rxjs';
+import { catchError, delay, firstValueFrom, of, tap, throwError } from 'rxjs';
 import { UserRequest } from '../models/user-request';
 import { ReturnHttp } from '../models/return-http';
 import { HttpClient } from '@angular/common/http';
@@ -25,9 +25,24 @@ export class UserService extends BaseService {
   }
 
 
+  /*CelciusPost*/ 
+
+  
+  public async celciusPost(celcius:number):Promise<ReturnHttp<{resposta:string}>>{
+    return await firstValueFrom(
+      this.http.post<ReturnHttp<{resposta:string}>>(`${this.getUrl()}/celciusPost`,{celcius:celcius}, {withCredentials:true})
+      .pipe(
+        catchError(error => {
+          this.TreateErrorHttp(error);
+          return throwError(() => error); // Repropaga o erro se necessário
+        })
+      )
+    );
+  }
+
   public async celcius(celcius:number):Promise<ReturnHttp<{resposta:string}>>{
     return await firstValueFrom(
-      this.http.get<ReturnHttp<{resposta:string}>>(`${this.getUrl()}/celcius/${celcius}`)
+      this.http.get<ReturnHttp<{resposta:string}>>(`${this.getUrl()}/celcius/${celcius}`,{withCredentials:true})
       .pipe(
         catchError(error => {
           this.TreateErrorHttp(error);
@@ -53,13 +68,17 @@ export class UserService extends BaseService {
 
   public async logar(user: UserRequest): Promise<ReturnHttp<UserResponse>> {
     return await firstValueFrom(
-      this.http.get<ReturnHttp<UserResponse>>(`${this.getUrl()}/?username=${user.userName}&password=${user.password}`)
-      .pipe(
+      this.http.get<ReturnHttp<UserResponse>>(`${this.getUrl()}?username=${user.userName}&password=${user.password}`)
+       .pipe(
+        tap(resp=>{
+          console.log('cookie add')
+         // document.cookie = `access_token=${resp.data?.accessToken}; Secure; HttpOnly; SameSite=Strict`;
+        }),
         catchError(error => {
           this.TreateErrorHttp(error);
           return throwError(() => error); // Repropaga o erro se necessário
         })
-      )
+      ) 
     );
   }
 }

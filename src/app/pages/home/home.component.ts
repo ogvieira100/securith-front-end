@@ -22,7 +22,7 @@ export class HomeComponent {
 
   async clickCelcius() {
 
-    await    this.userService.celcius(100).then(e=>{
+    await    this.userService.celciusPost(100).then(e=>{
         this.celciusVal = e.data?.resposta ?? '';
 
     }).catch(e=>{}).finally(()=>{})
