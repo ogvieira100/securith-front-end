@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { UserResponse } from '../models/user-response';
-import { catchError, delay, firstValueFrom, of, tap, throwError } from 'rxjs';
+import { catchError, delay, firstValueFrom, Observable, of, tap, throwError } from 'rxjs';
 import { UserRequest } from '../models/user-request';
 import { ReturnHttp } from '../models/return-http';
 import { HttpClient } from '@angular/common/http';
@@ -28,9 +28,9 @@ export class UserService extends BaseService {
   /*CelciusPost*/ 
 
   
-  public async celciusPost(celcius:number):Promise<ReturnHttp<{resposta:string}>>{
+  public async celciusPost(celcius:string):Promise<ReturnHttp<{resposta:string}>>{
     return await firstValueFrom(
-      this.http.post<ReturnHttp<{resposta:string}>>(`${this.getUrl()}/celciusPost`,{celcius:celcius}, {withCredentials:true})
+      this.http.post<ReturnHttp<{resposta:string}>>(`api/v1/user/CelciusPost`,{celcius:celcius},{withCredentials:true})
       .pipe(
         catchError(error => {
           this.TreateErrorHttp(error);
@@ -66,6 +66,10 @@ export class UserService extends BaseService {
   }
 
 
+    // Método para obter dados (GET)
+    getXSRFToken(): Observable<any> {
+      return this.http.get(`${this.getUrl()}/GetXSRFToken`);
+    }
   public async logar(user: UserRequest): Promise<ReturnHttp<UserResponse>> {
     return await firstValueFrom(
       this.http.get<ReturnHttp<UserResponse>>(`${this.getUrl()}?username=${user.userName}&password=${user.password}`)

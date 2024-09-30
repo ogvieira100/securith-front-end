@@ -1,1 +1,4 @@
 ng b --configuration=local  --base-href / --output-path D:\Projetos\securith-backend\Portal.Fornecedor.Api\wwwroot
+
+
+ng serve --proxy-config proxy.conf.json  --configuration=local

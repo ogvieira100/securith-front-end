@@ -3,10 +3,15 @@
     
     <app-text-field> </app-text-field>
     <app-button> Clicar </app-button>
+    <input title="btn" (click)="clickCelciusGet()" type="button" value="Calcular Celsios Get" />
+    <h1>
+      {{ celciusGetVal }}
+    </h1>
     <input title="btn" (click)="clickCelcius()" type="button" value="Calcular Celsios" />
     <h1>
       {{ celciusVal }}
     </h1>
     <button class="btn btn-primary" (click)="openModal()">Abrir Modal com Componente Dinâmico</button>
+    <button class="btn btn-primary" (click)="refreshXSRF()">RefreshXSRF</button>
   </div>
 </app-master-page>

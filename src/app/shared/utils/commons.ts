@@ -2,6 +2,11 @@ import { AbstractControl } from "@angular/forms";
 
 export class Commons {
 
+    static   getBaseUrl():string {
+        let baseUrl = document.getElementsByTagName('base')[0].href.slice(0, -1);
+        return baseUrl.replace(/^http[s]{0,1}\:/, '');
+      }
+
 
     static generateGUID   ():string
     {

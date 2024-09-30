@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ComponentsModule } from '../../shared/components/components.module';
 import { RouterOutlet } from '@angular/router';
 import { UserService } from '../../shared/services/user.service';
@@ -16,21 +16,53 @@ import { CaptchaComponent } from "../../shared/components/captcha/captcha.compon
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+
+  
+      refreshXSRF() {
+        this.refreshXSRF();
+      }
 
   celciusVal:string  = ''
+  celciusGetVal:string  = ''
 
-  async clickCelcius() {
 
-    await    this.userService.celciusPost(100).then(e=>{
+  
+
+  async clickCelciusGet() {
+
+    await    this.userService.celcius(100).then(e=>{
         this.celciusVal = e.data?.resposta ?? '';
 
     }).catch(e=>{}).finally(()=>{})
   }
   
 
-  constructor(private readonly modalService: NgbModal, private readonly userService:UserService, private readonly loaderService:LoaderService){}
+  async clickCelcius() {
 
+    await    this.userService.celciusPost(`100`).then(e=>{
+        this.celciusGetVal = e.data?.resposta ?? '';
+
+    }).catch(e=>{}).finally(()=>{})
+  }
+  
+
+  constructor(private readonly modalService: NgbModal, private readonly userService:UserService, private readonly loaderService:LoaderService){}
+  ngOnInit(): void {
+    this.XSRF();
+  }
+
+
+  private XSRF() {
+    this.userService.getXSRFToken().subscribe({
+      next: (response) => {
+      },
+      error: (error) => {
+        console.error('Erro ao carregar dados', error);
+      },
+    });
+  }
 
   openModal() {
     const modalRef = this.modalService.open(ModalComponent);

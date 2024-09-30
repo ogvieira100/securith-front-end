@@ -11,6 +11,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { xsrfTokenInterceptor } from './shared/interceptors/xsrf-token-interceptor.interceptor';
 
 export const appConfig: ApplicationConfig = {
 
@@ -25,11 +26,7 @@ export const appConfig: ApplicationConfig = {
     }),
     
     provideHttpClient(
-      withInterceptors([loaderInterceptor,authInterceptor]),
-      withXsrfConfiguration({
-        cookieName: 'XSRF-TOKEN',   // Nome do cookie que o backend envia
-        headerName: 'X-XSRF-TOKEN'  // Nome do cabeçalho que será enviado nas requisições HTTP
-      })
+      withInterceptors([loaderInterceptor,xsrfTokenInterceptor])
     ),
     provideRouter(routes)]
 };

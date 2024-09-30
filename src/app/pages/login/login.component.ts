@@ -46,6 +46,8 @@ export class LoginComponent {
 
   async login() {
 
+  
+
     if (this.loginForm.valid)
     {
      await  this.userService.logar({userName:this.userName,password:this.password})
